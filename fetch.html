@@ -32,9 +32,7 @@
             headers:{'Content-Type':'application/x-www-form-urlencoded'}
           })
         .then(function(response){
-
             return response.json()
-                
         })
         .then(function(data){ 
 	
@@ -48,7 +46,7 @@
                                 <div>${event.content}</div>
                             </li>`)})
 
-            $(".title").text(data.title) //class title的文字內容抓data的title
+            $(".title").text(data.title)
             $(".updated").text(data.updated)   
     
     })
