@@ -41,15 +41,11 @@
 </body>
 </html>
 <script>
-
 loadpage("./results/main.html");
-
 //建立一個函式loadpage(page)用來載入內容至content區塊中
 function loadpage(page){
   $.get(page,(res)=>{
     $(".content").html(res);
   })
-
 }
-
 </script>
