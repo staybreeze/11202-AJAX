@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 設定文件的基本元信息 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>XMLHttpRequest</title>
+    <!-- 設定網頁圖標和引入樣式表 -->
     <link rel="shortcut icon" href="#" type="image/x-icon">
     <link rel="stylesheet" href="./plugin/css/bootstrap.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- 網頁主體部分 -->
     <h1 class="header">XMLHttpRequest</h1>
     <h4 class="title"></h4>
-    <div class="updated" ></div>
+    <div class="updated"></div>
     <ul class="list-group"></ul>
-<script src="./plugin/js/jquery.js"></script>
-<script src="./plugin/js/bootstrap.js"></script>    
+    <!-- 引入 jQuery 和 Bootstrap JavaScript  -->
+    <script src="./plugin/js/jquery.js"></script>
+    <script src="./plugin/js/bootstrap.js"></script>    
 </body>
 </html>
 <script>
-    /********************************************************
-    * 1.api網址  https://kktix.com/events.json
-    * 2.宣告一個XMLHttpRequest物件
-    * 3.建立請求的各項設定及實質內容
-    * 4.建立得到回應時的各項行為
-    * 5.送出請求
-    ********************************************************/
+    // JavaScript 代碼開始
 
-    //宣告一個XMLHttpRequest物件
-    let xhr=new XMLHttpRequest
+    // 宣告一個 XMLHttpRequest 物件
+    let xhr = new XMLHttpRequest;
 
-    //建立請求的各項設定及實質內容
-    //async - 非同步
-    //sync - 同步
-    xhr.open('GET','https://kktix.com/events.json');
+    // 建立請求的各項設定及實質內容
+    // 使用 GET 方法向指定 URL 發送請求
+    xhr.open('GET', 'https://kktix.com/events.json');
+    // 設定伺服器回應的類型，這裡指定為 JSON
     xhr.responseType = 'json';
-    //建立得到回應時的各項設定及行為
-    xhr.onload=function(){  
-        let type=xhr.getResponseHeader("Content-Type");
-        let status=xhr.status
-        //let response=xhr.responseText
-        let response=xhr.response
-        //let res=JSON.parse(response) //轉換文字為json格式的物件
-        console.log(response)
-        let events=response.entry;
-        //console.log(events);
-        events.forEach((event,idx)=>{
-               // $("ul").append("<li>"+event.title+"</li>")
+
+    // 建立得到回應時的各項設定及行為
+    xhr.onload = function () {  
+        // 取得伺服器回應的 Content-Type 和狀態碼
+        let type = xhr.getResponseHeader("Content-Type");
+        let status = xhr.status;
+        // 取得回應的內容
+        let response = xhr.response;
+
+        // 輸出回應的內容至控制台
+        console.log(response);
+
+        // 提取回應中的事件數據
+        let events = response.entry;
+
+        // 遍歷事件並將它們添加到網頁中
+        events.forEach((event, idx) => {
             $("ul").append(`<li class='list-group-item list-group-item-action'>
                                 <div>${event.title}</div>
                                 <div>${event.summary}</div>
                                 <div>${event.content}</div>
-                            </li>"`)
-        })
-        $(".title").text(response.title)
-        $(".updated").text(response.updated)
+                            </li>"`);
+        });
 
-}
+        // 將回應中的標題和更新時間放入對應的 HTML 元素中
+        $(".title").text(response.title);
+        $(".updated").text(response.updated);
+    }
 
-    //送出請求
-    xhr.send()
-    </script>
+    // 送出請求
+    xhr.send();
+</script>
