@@ -14,6 +14,7 @@
                     if(isset($_GET['id'])){
                         include_once "db.php";
                        $user=$Student->find($_GET['id']);
+                    //    extract將$user裡面的KEY值都變成變數
                        extract($user);
                     }
                 ?>
